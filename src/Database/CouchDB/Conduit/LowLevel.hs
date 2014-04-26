@@ -35,6 +35,9 @@ import qualified Network.HTTP.Types as HT
 
 import Database.CouchDB.Conduit.Internal.Connection
 
+import Data.Default as H
+
+
 -- | CouchDB response
 type CouchResponse m = H.Response (ResumableSource m B.ByteString)
 
@@ -48,7 +51,7 @@ couch :: MonadCouch m =>
                                 --   'couchPrefix' will be prepended to path.
     -> HT.RequestHeaders        -- ^ Headers
     -> HT.Query                 -- ^ Query args
-    -> H.RequestBody m          -- ^ Request body
+    -> H.RequestBody            -- ^ Request body
     -> (CouchResponse m -> m (CouchResponse m))
                                 -- ^ Protect function. See 'protect'
     -> m (CouchResponse m)
@@ -67,7 +70,7 @@ couch' :: MonadCouch m =>
                                 --   be correct 'Path' with escaped fragments.
     -> HT.RequestHeaders        -- ^ Headers
     -> HT.Query                 -- ^ Query args
-    -> H.RequestBody m          -- ^ Request body
+    -> H.RequestBody            -- ^ Request body
     -> (CouchResponse m -> m (CouchResponse m))
                                 -- ^ Protect function. See 'protect'
     -> m (CouchResponse m)
